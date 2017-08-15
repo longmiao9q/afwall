@@ -32,6 +32,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import dev.ukanth.ufirewall.Api;
 import dev.ukanth.ufirewall.R;
+import dev.ukanth.ufirewall.admin.AdminDeviceReceiver;
 import dev.ukanth.ufirewall.log.Log;
 import dev.ukanth.ufirewall.util.FingerprintUtil;
 import dev.ukanth.ufirewall.util.G;
@@ -55,8 +56,8 @@ public class SecPreferenceFragment extends PreferenceFragment implements
 
     private static final int REQUEST_CODE_ENABLE_ADMIN = 10237; // identifies
 
-    /*private static ComponentName deviceAdmin;
-    private static DevicePolicyManager mDPM;*/
+    private static ComponentName deviceAdmin;
+    private static DevicePolicyManager mDPM;
 
     private Context globalContext = null;
 
@@ -66,19 +67,19 @@ public class SecPreferenceFragment extends PreferenceFragment implements
         if (pref == null) {
             return;
         }
-        /*enableAdminPref = (CheckBoxPreference) pref;
+        enableAdminPref = (CheckBoxPreference) pref;
         // query the actual device admin status from the system
-        enableAdminPref.setChecked(mDPM.isAdminActive(deviceAdmin));*/
+        enableAdminPref.setChecked(mDPM.isAdminActive(deviceAdmin));
     }
 
     @SuppressLint("NewApi")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // update settings with actual device admin setting
-        /*mDPM = (DevicePolicyManager) this.getActivity().getSystemService(
+        mDPM = (DevicePolicyManager) this.getActivity().getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         deviceAdmin = new ComponentName(this.getActivity()
-                .getApplicationContext(), AdminDeviceReceiver.class);*/
+                .getApplicationContext(), AdminDeviceReceiver.class);
         super.onCreate(savedInstanceState);
 
         globalContext = this.getActivity();
@@ -90,7 +91,7 @@ public class SecPreferenceFragment extends PreferenceFragment implements
         preSelectListForBackward();
 
         setupDeviceSecurityCheck(findPreference("enableDeviceCheck"));
-        //setupEnableAdmin(findPreference("enableAdmin"));
+        setupEnableAdmin(findPreference("enableAdmin"));
 
         //passOption = G.protectionLevel();
 
@@ -281,7 +282,7 @@ public class SecPreferenceFragment extends PreferenceFragment implements
                 checkFingerprintDeviceSupport();
             }
         }
-        /*if (key.equals("enableAdmin")) {
+        if (key.equals("enableAdmin")) {
             boolean value = G.enableAdmin();
             if (value) {
                 Log.d("Device Admin Active ?", mDPM.isAdminActive(deviceAdmin)
@@ -303,7 +304,7 @@ public class SecPreferenceFragment extends PreferenceFragment implements
                             getString(R.string.device_admin_disabled), Toast.LENGTH_LONG);
                 }
             }
-        }*/
+        }
         if (key.equals("enableStealthPattern")) {
             AlpSettings.Display.setStealthMode(this.getActivity().getApplicationContext(),
                     G.enableStealthPattern());

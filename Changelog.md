@@ -1,6 +1,12 @@
 Changelog AFWall+
 ==================
 
+Version 2.9.6.1
+* Fixed tasker enable/disable 
+* User reported crash fixes
+* Minor UI changes in tasker plugin
+* ANR when using detecting busybox
+
 Version 2.9.6
 * LAN/Data leak issues on 7.x
 * Application list refresh issue
